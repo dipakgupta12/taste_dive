@@ -49,7 +49,6 @@ def index():
 
     :return: index page.
     """
-    print(request.form, "@"*50)
     form = SearchForm()
     return render_template("index.html", form=form)
 
@@ -64,7 +63,6 @@ def search():
         movies = Movie.objects(Tag=request.form["name"]).all()
         if len(movies) > 0:
             return render_template("index.html", movies=movies)
-    print(request.form, "@"*50)
     filtered_movies = get_movies(request.form["name"])
     movie_instances = [Movie(**data) for data in filtered_movies]
     Movie.objects.insert(movie_instances, load_bulk=False)
